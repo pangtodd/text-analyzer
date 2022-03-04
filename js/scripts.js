@@ -31,7 +31,25 @@ function numberOfOccurrencesInText(word, text) {
       wordCount++;
     }
   });
-  return wordCount;
+  return word, wordCount;
+}
+
+function topThreeWords(text) {
+  let countingArray = [];
+  let wArray = text.toLowerCase().split(" ");
+  let wordArray = wArray.sort();
+  wordArray.forEach(function(i) {
+    let wordCount = 0;
+    wordArray.forEach(function (j) {
+      if (j.toLowerCase().includes(i.toLowerCase())){
+      wordCount++;
+    }
+   });
+   wordArray.shift();
+   countingArray.push(wordCount + ": "+ i);
+  });
+  return countingArray.sort().reverse();
+  console.log(countingArray);
 }
 
 // UI Logic
@@ -59,10 +77,14 @@ $(document).ready(function(){
   $("form#word-counter").submit(function(event){
     event.preventDefault();
     const passage = $("#text-passage").val();
+    console.log(passage);
     const word = $("#word").val();
+    topWords = topThreeWords(passage);
+    console.log(topWords); 
     const wordCount = wordCounter(passage);
     const occurrencesOfWord = numberOfOccurrencesInText(word, passage);
     $("#total-count").html(wordCount);
+    $("#selected-word").html(word);
     $("#selected-count").html(occurrencesOfWord);
     $("#bolded-passage").html(boldPassage(word, passage));
   });

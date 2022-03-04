@@ -45,8 +45,8 @@ function topThreeWords(text) {
       wordCount++;
     }
    });
-   wordArray.shift();
    countingArray.push(wordCount + ": "+ i);
+   wordArray.shift();
   });
   return countingArray.sort().reverse();
   console.log(countingArray);
@@ -87,5 +87,9 @@ $(document).ready(function(){
     $("#selected-word").html(word);
     $("#selected-count").html(occurrencesOfWord);
     $("#bolded-passage").html(boldPassage(word, passage));
+    $("#topWord").html(topWords[0]);
+    $("#secondWord").html(topWords[1]);
+    $("#thirdWord").html(topWords[2]);
+
   });
 });
